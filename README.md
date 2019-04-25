@@ -10,7 +10,7 @@ Realizado por
  
 
              Instalacion de login para termux
-                  https://t.me/x3rukin0x
+                  https://t.me/@3rukin0x
 
 En este proyecto encontraras un login para termux que tiene 
 la ayuda de poder leer tu huella de acceso para dejarte 
