@@ -1,0 +1,145 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+#codigo 17 dw Noviembre del 2018
+
+pregunta1=$(base64 -d $PREFIX/libexec/termux/.quiz/pregunta_1)
+respuesta1=$(base64 -d $PREFIX/libexec/termux/.quiz/resp_1)
+clave_1=$(base64 -d $PREFIX/libexec/termux/.password/pass)
+function inicio_opc {
+    source $PREFIX/libexec/.banners/logo
+     echo
+     echo "°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+     echo "1)  Olvidaste la contraseña"
+     echo "2)  Regresar al menu anterior"
+     echo "3)  Cambiar clave"
+     echo "4)  Cambiar pregunta de seguridad"
+     echo "°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+     echo 
+    read -n 1 -p "Ingresa la opcion deseada $ " opc
+
+     if [ $opc -eq 1 ]; then
+     sleep 1
+     echo
+     cuestionario
+     echo
+    elif [ $opc -eq 2 ]; then
+     echo
+     sleep 1
+     source $PREFIX/var/log/login.sh
+    elif [ $opc -eq 3 ]; then
+     sleep 2
+     cambio_clave
+    elif [ $opc -eq 4 ]; then
+    sleep 2
+    cambio_pregunta
+    else echo  "opcion no valida"
+    sleep 2
+    fi
+}
+
+function cuestionario {
+     clear
+    source $PREFIX/libexec/.banners/logo
+     echo "Responde la pregunta de seguridad para recuperar 
+tu clave"
+     echo "$pregunta1"
+     echo
+     read -p "$" respuesta
+     echo
+    if [ ["$respuesta"] = ["$respuesta1"] ]; then
+     echo 
+     echo "CORRECTO"
+     echo "Por favor esperar"
+     echo "."
+     sleep 0.80
+     echo ".."
+     sleep 0.80
+     echo "..."
+     sleep 0.80
+    source $PREFIX/libexec/.banners/logo
+     clear
+     echo "$clave_1"
+     sleep 6
+     clear
+     source $PREFIX/var/log/login.sh
+    else echo "error"
+    echo "error"
+    inicio_opc
+
+    fi
+}
+function cambio_pregunta {
+   clear
+   echo "PROCESANDO"
+   source $PREFIX/libexec/.banners/logo
+   read -p "Por favor ingresar clave actual para cambiar pregunta de seguridad $ " clave
+   if [ ["$clave"] = ["$clave_1"] ]; then
+    echo "Porfavor ingrese la nueva pregunta de seguridad"
+    read -p "$ " pregunta_1 
+    echo "Porfavor ingrese la respuesta"
+    read -p "$ " respuesta_1 
+    clear
+    source $PREFIX/libexec/.banners/logo
+    echo "Ingrese nuevamente la respuesta"
+    read -p "$ " respuesta_2
+    clear
+    source $PREFIX/libexec/.banners/logo
+    if [ ["$respuesta_1"] = ["$respuesta_2"] ]; then
+    echo "Completando cambio de pregunta y respuesta"
+   printf "$pregunta_1" > $PREFIX/libexec/termux/.quiz/pregunta
+   rm $PREFIX/libexec/termux/.quiz/pregunta_1
+   base64 $PREFIX/libexec/termux/.quiz/pregunta > $PREFIX/libexec/termux/.quiz/pregunta_1
+   rm $PREFIX/libexec/termux/.quiz/pregunta
+   printf "$respuesta_1" > $PREFIX/libexec/termux/.quiz/resp
+   rm $PREFIX/libexec/termux/.quiz/resp_1
+   base64 $PREFIX/libexec/termux/.quiz/resp > $PREFIX/libexec/termux/.quiz/resp_1
+   rm $PREFIX/libexec/termux/.quiz/resp
+   sleep 2
+   source $PREFIX/var/log/login.sh
+   else 
+   clear
+   source $PREFIX/libexec/.banners/logo
+   echo "Error no coinciden las respuestas"
+   sleep 3
+   cambio_pregunta
+   fi
+  fi
+}
+
+function cambio_clave {
+      echo
+      clear
+     source $PREFIX/libexec/.banners/logo
+      read -p "Ingrese su clave actual $ " clave_ac
+      if [ ["$clave_ac"] = ["$clave_1"] ]; then
+       echo " Iniciando"
+       echo
+       read -p "Ingrese nueva clave $ " clave_n
+      sleep 1
+      clear
+     source $PREFIX/libexec/.banners/logo
+       read -p "Ingrese nuevamente clave nueva $ " 
+clave_co
+       if  [ ["$clave_n"] = ["$clave_co"] ]; then
+        printf "$clave_n" > $PREFIX/libexec/termux/.password/pass1
+        rm $PREFIX/libexec/termux/.password/pass
+ base64 $PREFIX/libexec/termux/.password/pass1 > $PREFIX/libexec/termux/.password/pass
+        rm $PREFIX/libexec/termux/.password/pass1
+        sleep 2
+        source $PREFIX/var/log/login.sh
+        else
+       source $PREFIX/libexec/.banners/logo
+        echo " ERROR "
+        echo "la nueva clave no coincide inicia nuevamente
+el proceso"
+        sleep 2
+        cambio_clave
+      fi
+    else
+      inicio_opc
+
+    fi
+}
+clear
+echo 
+inicio_opc

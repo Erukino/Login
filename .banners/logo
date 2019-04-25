@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# 19 de noviembre del 2018
+source $HOME/Login/colors
+echo -e  "
+
+
+      ++++++++++++++++++++++++++++
+      ++++++++++++++++++++++++++++
+      +++                      +++
+      +++                      +++
+      +++      $red##########$reset      +++
+      +++      $red#3rukin0x#$reset      +++
+       +++     $red##########$reset     +++
+        +++                  +++
+         +++                +++
+          +++$yellow@            @$reset+++
+           +++$yellow@@@      @@@$reset+++
+            +++$yellow@@@@@@@@@$reset+++
+             +++ $yellow@@@@@$reset +++
+              +++ $yellow @@$reset +++
+             +++  $yellow @@$reset  +++
+            +++   $yellow @@$reset   +++
+           +++     $yellow@@$reset    +++
+          +++$yellow      @@$reset     +++
+         +++  $yellow    @@@@$reset     +++
+        +++    $yellow @@@@@@@@$reset    +++
+       +++ $yellow  @@@@@@@@@@@@@$reset   +++
+      +++$yellow  @@@@@@@@@@@@@@@@@$reset  +++
+      +++$yellow@@@$blue Lo+peor+es+no $yellow@@@$reset+++
+      +++$yellow@@@@@$blue intentarlo $yellow@@@@$reset+++
+      +++$yellow@@@@@@@@@@@@@@@@@@@@@$reset+++
+      +++++++++++++++++++++++++++
+      +++++++++++++++++++++++++++
+"

@@ -1,0 +1,8 @@
+{
+  "errors": [
+    "ERROR_LOCKOUT",
+    "ERROR_TOO_MANY_FAILED_ATTEMPTS"
+  ],
+  "failed_attempts": 5,
+  "auth_result": "AUTH_RESULT_FAILURE"
+}
